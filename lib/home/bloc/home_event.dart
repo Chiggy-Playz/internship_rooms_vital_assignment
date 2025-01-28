@@ -6,3 +6,17 @@ sealed class HomeEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class HomeLoadRequested extends HomeEvent {
+  const HomeLoadRequested();
+}
+
+class HomeScanDevicesRequested extends HomeEvent {
+  const HomeScanDevicesRequested();
+}
+
+class HomeConnectToDevice extends HomeEvent {
+  final BluetoothDevice device;
+
+  const HomeConnectToDevice({required this.device});
+}

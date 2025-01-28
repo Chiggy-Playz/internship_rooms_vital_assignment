@@ -54,6 +54,11 @@ class AppView extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
           ),
+          listTileTheme: ListTileThemeData(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          )
         ),
       ),
     );

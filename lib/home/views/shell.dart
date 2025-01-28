@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rooms_vital_assignment/app/app.dart';
 import 'package:rooms_vital_assignment/home/home.dart';
 
 const navigationBarDestinations = [
@@ -34,6 +35,14 @@ class HomeShellPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(navigationBarDestinations[index].label),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.logout),
+              onPressed: () {
+                context.read<AppBloc>().add(const AppLogoutRequested());
+              },
+            ),
+          ],
         ),
         body: navigatorShell,
         bottomNavigationBar: NavigationBar(
