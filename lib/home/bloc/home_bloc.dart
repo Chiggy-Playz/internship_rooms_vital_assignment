@@ -54,31 +54,32 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       HomeScanDevicesRequested event, Emitter<HomeState> emit) async {
     await FlutterBluePlus.startScan(timeout: const Duration(seconds: 5));
 
-    return emit.forEach(
-      FlutterBluePlus.onScanResults,
-      onData: (scanResults) {
-        return HomeLoaded(
-          adapterState: (state as HomeLoaded).adapterState,
-          scanResults: scanResults,
-        );
-      },
-    );
+    return emitScanResults(emit, state);
   }
 
   Future<void> _connectToDevice(
       HomeConnectToDevice event, Emitter<HomeState> emit) async {
     await event.device.connect();
+    await event.device.discoverServices();
     final currentState = state;
     emit(HomeSnackbarState(
         message:
             "Connected to ${event.device.advName.isEmpty ? 'Unknown' : event.device.advName}!",
         type: SnackbarType.info));
+    return emitScanResults(emit, currentState);
+  }
+
+  Future<void> emitScanResults(
+      Emitter<HomeState> emit, HomeState currentState) {
     return emit.forEach(
       FlutterBluePlus.onScanResults,
       onData: (scanResults) {
         return HomeLoaded(
           adapterState: (currentState as HomeLoaded).adapterState,
-          scanResults: scanResults,
+          scanResults: scanResults
+            ..sort(
+              (a, b) => b.rssi.compareTo(a.rssi),
+            ),
         );
       },
     );

@@ -4,6 +4,7 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rooms_vital_assignment/core/extensions.dart';
+import 'package:rooms_vital_assignment/device_details/views/device_details_page.dart';
 import 'package:rooms_vital_assignment/home/home.dart';
 
 class HomeView extends StatefulWidget {
@@ -89,8 +90,6 @@ class _HomeViewState extends State<HomeView> {
                           .add(const HomeScanDevicesRequested());
                     },
                     child: ListView.separated(
-                      // shrinkWrap: true,
-                      // physics: const NeverScrollableScrollPhysics(),
                       separatorBuilder: (context, index) => const Gap(8),
                       itemCount: state.scanResults.length,
                       itemBuilder: (context, index) {
@@ -105,7 +104,9 @@ class _HomeViewState extends State<HomeView> {
                             leading: const Icon(Icons.bluetooth),
                             tileColor: context.colorScheme.primaryContainer,
                             title: Text(name),
-                            subtitle: Text(scanResult.device.remoteId.str),
+                            subtitle: Text(
+                                "${scanResult.device.remoteId.str}\n${scanResult.rssi} dBm"),
+                            // isThreeLine: true,
                             trailing: !scanResult.advertisementData.connectable
                                 ? null
                                 : FilledButton(
@@ -117,7 +118,10 @@ class _HomeViewState extends State<HomeView> {
                                               ),
                                             );
                                       } else {
-                                        // context.go(DeviceDetails.routePath);
+                                        context.pushNamed(
+                                          DeviceDetailsPage.routeName,
+                                          extra: scanResult.device,
+                                        );
                                       }
                                     },
                                     child: Text(

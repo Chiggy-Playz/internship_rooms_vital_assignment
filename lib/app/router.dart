@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rooms_vital_assignment/app/app.dart';
+import 'package:rooms_vital_assignment/device_details/views/device_details_page.dart';
 import 'package:rooms_vital_assignment/home/home.dart';
 import 'package:rooms_vital_assignment/loading/views/loading_page.dart';
 import 'package:rooms_vital_assignment/login/login.dart';
@@ -87,6 +89,14 @@ GoRouter getRouter({
           )
         ],
       ),
+      GoRoute(
+        path: DeviceDetailsPage.routePath,
+        name: DeviceDetailsPage.routeName,
+        builder: (context, state) {
+          final device = state.extra as BluetoothDevice;
+          return DeviceDetailsPage(device: device);
+        },
+      )
     ],
   );
 }

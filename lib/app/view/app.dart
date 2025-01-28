@@ -43,23 +43,21 @@ class AppView extends StatelessWidget {
   Widget build(BuildContext context) {
     final router = getRouter(appBloc: context.read<AppBloc>());
     return BlocListener<AppBloc, AppState>(
-      listener: (context, state) {
-      },
+      listener: (context, state) {},
       child: MaterialApp.router(
         themeMode: ThemeMode.system,
         routerConfig: router,
         theme: ThemeData.light().copyWith(
-          inputDecorationTheme: InputDecorationTheme(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
+            inputDecorationTheme: InputDecorationTheme(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
             ),
-          ),
-          listTileTheme: ListTileThemeData(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          )
-        ),
+            listTileTheme: ListTileThemeData(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            )),
       ),
     );
   }
