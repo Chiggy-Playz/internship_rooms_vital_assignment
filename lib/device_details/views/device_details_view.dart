@@ -10,6 +10,8 @@ import 'dart:convert' show utf8;
 class DeviceDetailsView extends StatefulWidget {
   const DeviceDetailsView({super.key, required this.device});
 
+  // Now that i think about it, this should've been given to bloc instead...
+  // no bloc for this widget ig :)
   final BluetoothDevice device;
 
   @override
