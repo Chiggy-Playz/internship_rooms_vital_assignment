@@ -10,7 +10,7 @@ part 'app.state.dart';
 class AppBloc extends Bloc<AppEvent, AppState> {
   AppBloc({
     required AuthenticationClient authenticationClient,
-    required UserModel user,
+    required UserModel? user,
   })  : _authenticationClient = authenticationClient,
         super(
           AppState(user: user),

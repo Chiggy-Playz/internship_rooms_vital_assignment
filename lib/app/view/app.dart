@@ -8,12 +8,12 @@ class App extends StatelessWidget {
   const App({
     super.key,
     required AuthenticationClient authenticationClient,
-    required UserModel user,
+    required UserModel? user,
   })  : _authenticationClient = authenticationClient,
         _user = user;
 
   final AuthenticationClient _authenticationClient;
-  final UserModel _user;
+  final UserModel? _user;
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +44,14 @@ class AppView extends StatelessWidget {
     final router = getRouter(appBloc: context.read<AppBloc>());
     return MaterialApp.router(
       themeMode: ThemeMode.system,
-      routerDelegate: router.routerDelegate,
-      routeInformationParser: router.routeInformationParser,
+      routerConfig: router,
+      theme: ThemeData.light().copyWith(
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+      ),
     );
   }
 }

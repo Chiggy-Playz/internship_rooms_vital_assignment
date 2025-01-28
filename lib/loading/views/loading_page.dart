@@ -10,13 +10,14 @@ class LoadingPage extends StatelessWidget {
     return const Scaffold(
       body: Center(
         child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Center(child: CircularProgressIndicator()),
-              SizedBox(height: 16),
-              Center(child: Text("Loading"))
-            ]),
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Center(child: CircularProgressIndicator()),
+            SizedBox(height: 16),
+            Center(child: Text("Loading")),
+          ],
+        ),
       ),
     );
   }

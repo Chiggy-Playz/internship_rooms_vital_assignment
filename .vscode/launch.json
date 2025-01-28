@@ -1,0 +1,46 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+    
+        {
+            "name": "rooms_vital_assignment",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "rooms_vital_assignment (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "rooms_vital_assignment (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "authentication_client",
+            "cwd": "packages\\authentication_client",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "authentication_client (profile mode)",
+            "cwd": "packages\\authentication_client",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "authentication_client (release mode)",
+            "cwd": "packages\\authentication_client",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
