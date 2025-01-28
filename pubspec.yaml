@@ -43,6 +43,8 @@ dependencies:
   go_router: ^14.7.1
   google_sign_in: ^6.2.2
   intl: ^0.20.2
+  mqtt_handler: 
+    path: packages/mqtt_handler
 
 dev_dependencies:
   flutter_lints: ^4.0.0

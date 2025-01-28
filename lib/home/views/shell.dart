@@ -10,6 +10,10 @@ const navigationBarDestinations = [
     label: 'Home',
   ),
   NavigationDestination(
+    icon: Icon(Icons.message),
+    label: 'MQTT',
+  ),
+  NavigationDestination(
     icon: Icon(Icons.family_restroom),
     label: 'Family',
   ),

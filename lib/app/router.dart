@@ -8,6 +8,7 @@ import 'package:rooms_vital_assignment/device_details/views/device_details_page.
 import 'package:rooms_vital_assignment/home/home.dart';
 import 'package:rooms_vital_assignment/loading/views/loading_page.dart';
 import 'package:rooms_vital_assignment/login/login.dart';
+import 'package:rooms_vital_assignment/mqtt/mqtt.dart';
 import 'package:rooms_vital_assignment/signup/signup.dart';
 
 class GoRouterRefreshStream extends ChangeNotifier {
@@ -86,7 +87,16 @@ GoRouter getRouter({
                 builder: (context, state) => const HomeView(),
               ),
             ],
-          )
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: MqttPage.routePath,
+                name: MqttPage.routeName,
+                builder: (context, state) => const MqttPage(),
+              ),
+            ],
+          ),
         ],
       ),
       GoRoute(

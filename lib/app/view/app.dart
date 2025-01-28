@@ -1,6 +1,7 @@
 import 'package:authentication_client/authentication_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mqtt_handler/mqtt_handler.dart';
 import 'package:rooms_vital_assignment/app/bloc/app_bloc.dart';
 import 'package:rooms_vital_assignment/app/router.dart';
 
@@ -9,17 +10,21 @@ class App extends StatelessWidget {
     super.key,
     required AuthenticationClient authenticationClient,
     required UserModel? user,
+    required MqttHandler mqttHandler,
   })  : _authenticationClient = authenticationClient,
-        _user = user;
+        _user = user,
+        _mqttHandler = mqttHandler;
 
   final AuthenticationClient _authenticationClient;
   final UserModel? _user;
+  final MqttHandler _mqttHandler;
 
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider.value(value: _authenticationClient),
+        RepositoryProvider.value(value: _mqttHandler),
       ],
       child: MultiBlocProvider(
         providers: [
