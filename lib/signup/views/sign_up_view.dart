@@ -3,17 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rooms_vital_assignment/core/extensions.dart';
-import 'package:rooms_vital_assignment/login/bloc/login_bloc.dart';
-import 'package:rooms_vital_assignment/signup/views/sign_up_page.dart';
+import 'package:rooms_vital_assignment/login/login.dart';
+import 'package:rooms_vital_assignment/signup/signup.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+class SignUpView extends StatefulWidget {
+  const SignUpView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<SignUpView> createState() => _SignUpViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _SignUpViewState extends State<SignUpView> {
   final _formKey = GlobalKey<FormState>();
 
   String email = "";
@@ -21,14 +21,14 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginBloc, LoginState>(
+    return BlocListener<SignUpBloc, SignUpState>(
       listener: (context, state) {
-        if (state is LoginFailure) {
+        if (state is SignUpFailure) {
           context.showSnackBar("Login failed: ${state.error}");
         }
       },
       child: Scaffold(
-        appBar: AppBar(title: const Text("Login")),
+        appBar: AppBar(title: const Text("Sign Up")),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Form(
@@ -57,7 +57,6 @@ class _LoginViewState extends State<LoginView> {
                     }
                     return null;
                   },
-                  obscureText: true,
                   onSaved: (newValue) => password = newValue ?? "",
                 ),
                 const Gap(8),
@@ -65,36 +64,27 @@ class _LoginViewState extends State<LoginView> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextButton(
-                      onPressed: () => context.go(SignUpPage.routePath),
-                      child: const Text("Sign up!"),
+                      child: const Text("Log in!"),
+                      onPressed: () => context.go(LoginPage.routePath),
                     ),
                     FilledButton.icon(
-                      icon: const Icon(Icons.create),
+                      icon: const Icon(Icons.person_add),
                       onPressed: () {
                         if (!(_formKey.currentState!.validate())) {
                           return;
                         }
                         _formKey.currentState!.save();
 
-                        BlocProvider.of<LoginBloc>(context).add(
-                          LoginSubmitted(
+                        BlocProvider.of<SignUpBloc>(context).add(
+                          SignUpSubmitted(
                             email: email,
                             password: password,
                           ),
                         );
                       },
-                      label: const Text("Login!"),
+                      label: const Text("Sign up!"),
                     ),
                   ],
-                ),
-                const Gap(16),
-                const Text("- OR -"),
-                const Gap(16),
-                OutlinedButton.icon(
-                  icon: const Icon(Icons.login),
-                  onPressed: () =>
-                      context.read<LoginBloc>().add(LoginWithGooglePressed()),
-                  label: const Text("Login with Google"),
                 ),
               ],
             ),

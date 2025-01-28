@@ -6,6 +6,7 @@ import 'package:rooms_vital_assignment/app/app.dart';
 import 'package:rooms_vital_assignment/home/home.dart';
 import 'package:rooms_vital_assignment/loading/views/loading_page.dart';
 import 'package:rooms_vital_assignment/login/login.dart';
+import 'package:rooms_vital_assignment/signup/signup.dart';
 
 class GoRouterRefreshStream extends ChangeNotifier {
   late final StreamSubscription<dynamic> _subscription;
@@ -13,16 +14,12 @@ class GoRouterRefreshStream extends ChangeNotifier {
   GoRouterRefreshStream(Stream<dynamic> stream) {
     notifyListeners();
     _subscription = stream.asBroadcastStream().listen(
-      (dynamic _) {
-        print("hiiiii 3 $_  \$ \n \n");
-        notifyListeners();
-      },
-    );
+          (dynamic _) => notifyListeners(),
+        );
   }
 
   @override
   void dispose() {
-    print("hiiiii oh no Closing sub");
     _subscription.cancel();
     super.dispose();
   }
@@ -42,6 +39,7 @@ GoRouter getRouter({
 
       final isLoading = state.matchedLocation == LoadingPage.routePath;
       final isLoggingIn = state.matchedLocation == LoginPage.routePath;
+      final isRegistering = state.matchedLocation == SignUpPage.routePath;
 
       if (isLoading) {
         if (!isAuth) return LoginPage.routePath;
@@ -49,6 +47,11 @@ GoRouter getRouter({
       }
 
       if (isLoggingIn) {
+        if (isAuth) return HomeView.routePath;
+        return null;
+      }
+
+      if (isRegistering) {
         if (isAuth) return HomeView.routePath;
         return null;
       }
@@ -63,6 +66,10 @@ GoRouter getRouter({
       GoRoute(
         path: LoginPage.routePath,
         builder: (context, state) => const LoginPage(),
+      ),
+      GoRoute(
+        path: SignUpPage.routePath,
+        builder: (context, state) => const SignUpPage(),
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {

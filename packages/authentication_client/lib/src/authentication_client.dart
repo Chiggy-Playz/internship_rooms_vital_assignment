@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../authentication_client.dart';
@@ -92,10 +93,16 @@ class AuthenticationClient {
   Future<void> logOut() async {
     try {
       await Future.wait([
+        _firebaseAuth.signOut(),
         _googleSignIn.disconnect(),
         _googleSignIn.signOut(),
-        _firebaseAuth.signOut(),
       ]);
+    } on PlatformException catch (e) {
+      // When logged in via email, .disconnect() will throw an error
+      if (e.message == "Failed to disconnect.") {
+        return;
+      }
+      rethrow;
     } catch (error, stackTrace) {
       Error.throwWithStackTrace(LogOutFailure(error), stackTrace);
     }
