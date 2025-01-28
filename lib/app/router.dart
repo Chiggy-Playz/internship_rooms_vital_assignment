@@ -14,6 +14,7 @@ class GoRouterRefreshStream extends ChangeNotifier {
     notifyListeners();
     _subscription = stream.asBroadcastStream().listen(
       (dynamic _) {
+        print("hiiiii 3 $_  \$ \n \n");
         notifyListeners();
       },
     );
@@ -21,6 +22,7 @@ class GoRouterRefreshStream extends ChangeNotifier {
 
   @override
   void dispose() {
+    print("hiiiii oh no Closing sub");
     _subscription.cancel();
     super.dispose();
   }

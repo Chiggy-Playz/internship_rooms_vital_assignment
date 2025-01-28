@@ -4,8 +4,8 @@ import 'package:authentication_client/authentication_client.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-part 'app.event.dart';
-part 'app.state.dart';
+part 'app_event.dart';
+part 'app_state.dart';
 
 class AppBloc extends Bloc<AppEvent, AppState> {
   AppBloc({
@@ -40,5 +40,10 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   Future<void> close() {
     _userSubscription.cancel();
     return super.close();
+  }
+
+  @override
+  void onTransition(Transition<AppEvent, AppState> transition) {
+    super.onTransition(transition);
   }
 }

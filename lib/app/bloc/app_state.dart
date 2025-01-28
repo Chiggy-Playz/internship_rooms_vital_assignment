@@ -1,4 +1,4 @@
-part of 'app.bloc.dart';
+part of 'app_bloc.dart';
 
 class AppState extends Equatable {
   const AppState({
@@ -14,7 +14,7 @@ class AppState extends Equatable {
     UserModel? user,
   }) {
     return AppState(
-      user: user ?? this.user,
+      user: user,
     );
   }
 }
