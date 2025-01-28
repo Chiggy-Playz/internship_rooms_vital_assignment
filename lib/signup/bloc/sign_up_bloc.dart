@@ -12,7 +12,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     on<SignUpSubmitted>(_onSignUpSubmitted);
   }
 
-  AuthenticationClient _authenticationClient;
+  final AuthenticationClient _authenticationClient;
 
   void _onSignUpSubmitted(SignUpSubmitted event, Emitter<SignUpState> emit) {
     emit(SignUpInProgress());
