@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mqtt_handler/mqtt_handler.dart';
 import 'package:rooms_vital_assignment/core/extensions.dart';
 import 'package:rooms_vital_assignment/mqtt/mqtt.dart';
 
