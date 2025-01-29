@@ -1,4 +1,5 @@
 import 'package:authentication_client/authentication_client.dart';
+import 'package:database_handler/database_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mqtt_handler/mqtt_handler.dart';
@@ -11,13 +12,16 @@ class App extends StatelessWidget {
     required AuthenticationClient authenticationClient,
     required UserModel? user,
     required MqttHandler mqttHandler,
+    required DatabaseHandler databaseHandler,
   })  : _authenticationClient = authenticationClient,
         _user = user,
-        _mqttHandler = mqttHandler;
+        _mqttHandler = mqttHandler,
+        _databaseHandler = databaseHandler;
 
   final AuthenticationClient _authenticationClient;
   final UserModel? _user;
   final MqttHandler _mqttHandler;
+  final DatabaseHandler _databaseHandler;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +29,7 @@ class App extends StatelessWidget {
       providers: [
         RepositoryProvider.value(value: _authenticationClient),
         RepositoryProvider.value(value: _mqttHandler),
+        RepositoryProvider.value(value: _databaseHandler),
       ],
       child: MultiBlocProvider(
         providers: [

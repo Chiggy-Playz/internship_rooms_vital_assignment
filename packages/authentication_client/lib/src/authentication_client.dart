@@ -46,19 +46,22 @@ class AuthenticationClient {
     });
   }
 
-  Future<void> signUpWithEmailPassword(
+  Future<UserCredential> signUpWithEmailPassword(
       {required String email, required String password}) async {
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
-          email: email, password: password);
+      return await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
     } catch (error, stackTrace) {
-      // TODO: Handle errors
+      // TODO: Handle errors for various email things...
       Error.throwWithStackTrace(
           SignUpWithEmailPasswordFailure(error), stackTrace);
     }
   }
 
-  Future<void> logInWithGoogle() async {
+  Future<UserCredential> logInWithGoogle() async {
     try {
       final googleUser = await _googleSignIn.signIn();
       if (googleUser == null) {
@@ -71,7 +74,7 @@ class AuthenticationClient {
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-      await _firebaseAuth.signInWithCredential(credential);
+      return await _firebaseAuth.signInWithCredential(credential);
     } on LogInWithGoogleCanceled {
       rethrow;
     } catch (error, stackTrace) {

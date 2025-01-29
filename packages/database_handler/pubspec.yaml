@@ -1,0 +1,11 @@
+name: database_handler
+description: An implementation of the database handler
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  cloud_firestore: ^5.6.2
+  firebase_auth: ^5.4.1
