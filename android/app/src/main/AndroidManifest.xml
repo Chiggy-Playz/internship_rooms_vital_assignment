@@ -64,5 +64,5 @@
 
     <!-- FLUTTER BLUE PLUS END -->
 
-
+  <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>
