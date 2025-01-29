@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+// Most of this is bad code since the schema itself is very bad...
+// Need to redesign and properly think schema but out of time
 class DatabaseHandler {
   final FirebaseFirestore _firestore;
   final FirebaseAuth _auth;
@@ -56,7 +58,8 @@ class DatabaseHandler {
     return querySnapshot.docs.map((doc) => doc.data()).toList();
   }
 
-  Future<void> shareDeviceAccess(String deviceId, String userId) async {
+  Future<void> shareDeviceAccess(
+      String deviceId, String userId, String deviceName) async {
     String? ownerId = _auth.currentUser?.uid;
     if (ownerId == null) return;
 
@@ -65,8 +68,20 @@ class DatabaseHandler {
         .doc(ownerId)
         .collection('devices')
         .doc(deviceId);
+
+    final List<String> pairs = [];
+    for (int i = 0; i < deviceId.length; i += 2) {
+      if (i + 2 <= deviceId.length) {
+        pairs.add(deviceId.substring(i, i + 2));
+      } else {
+        pairs.add(deviceId.substring(i));
+      }
+    }
+
     await deviceRef.set({
-      "access_group": FieldValue.arrayUnion([userId])
+      "access_group": FieldValue.arrayUnion([userId]),
+      "name": deviceName,
+      "id": pairs.join(':')
     }, SetOptions(merge: true));
   }
 

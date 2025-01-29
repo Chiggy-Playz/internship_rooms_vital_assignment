@@ -14,12 +14,8 @@ const navigationBarDestinations = [
     label: 'MQTT',
   ),
   NavigationDestination(
-    icon: Icon(Icons.family_restroom),
-    label: 'Family',
-  ),
-  NavigationDestination(
-    icon: Icon(Icons.settings_rounded),
-    label: 'Settings',
+    icon: Icon(Icons.devices),
+    label: 'Shared Devices',
   ),
 ];
 
@@ -41,7 +37,7 @@ class HomeShellPage extends StatelessWidget {
           title: Text(navigationBarDestinations[index].label),
           actions: [
             IconButton(
-              icon: Icon(Icons.logout),
+              icon: const Icon(Icons.logout),
               onPressed: () {
                 context.read<AppBloc>().add(const AppLogoutRequested());
               },

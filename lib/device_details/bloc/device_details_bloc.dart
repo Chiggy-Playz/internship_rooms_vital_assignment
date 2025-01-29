@@ -60,6 +60,7 @@ class DeviceDetailsBloc extends Bloc<DeviceDetailsEvent, DeviceDetailsState> {
         (id) => _databaseHandler.shareDeviceAccess(
           _device.remoteId.str.replaceAll(":", ""),
           id,
+          _device.advName.isEmpty ? "Unknown" : _device.advName, 
         ),
       ),
     );
